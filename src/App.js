@@ -1,4 +1,4 @@
-import React from "react";
+import React, { Component } from "react";
 import "./App.css";
 
 //* Convertir a clase
@@ -10,6 +10,9 @@ class App extends React.Component {
     this.state = {
       top: "",
       bottom: "",
+      memes: [],
+      plantilla:
+        "https://images.memefier.com/media/memetemplates_500/b6c7ea36-ffc0-4228-b86d-2f565cc0b8f1.jpg",
     };
   }
 
@@ -18,13 +21,46 @@ class App extends React.Component {
     this.setState({ [name]: value });
   };
 
+  componentDidMount() {
+    fetch("https://api.imgflip.com/get_memes")
+      .then((responsive) => responsive.json())
+      .then((memesjson) => {
+        this.setState({
+          memes: memesjson.data.memes,
+        });
+      })
+      .catch((error) => {
+        console.log(error);
+        console.log("hubo un error");
+      });
+  }
   render() {
+    var { items } = this.state;
     return (
       <div className="App">
         <div className="container">
           <h1 className="title">¡Memeland!</h1>
-          <Meme top={this.state.top} bottom={this.state.bottom} />
+          <Meme
+            top={this.state.top}
+            bottom={this.state.bottom}
+            plantilla={this.state.plantilla}
+          />
           <MemeForm values={this.state} onChange={this.handleChange} />
+        </div>
+
+        <div className="conteiner_images">
+          {" "}
+          {this.state.memes.map((item) => {
+            return (
+              <img
+                src={item.url}
+                className="images"
+                onClick={() => {
+                  this.setState({ plantilla: item.url });
+                }}
+              />
+            );
+          })}
         </div>
       </div>
     );
@@ -35,11 +71,7 @@ class App extends React.Component {
 function Meme(props) {
   return (
     <div className="meme-template">
-      <img
-        className="image-template"
-        src="https://images.memefier.com/media/memetemplates_500/b6c7ea36-ffc0-4228-b86d-2f565cc0b8f1.jpg"
-        alt="Plantilla"
-      />
+      <img className="image-template" src={props.plantilla} alt="Plantilla" />
       <h2 className="top-text">{props.top}</h2>
       <h2 className="bottom-text">{props.bottom}</h2>
     </div>
@@ -65,6 +97,13 @@ function MemeForm(props) {
         className="form-input"
         onChange={props.onChange}
       />
+      <br></br>
+      <h3 className="creditos">
+        Created by Eduardo mendoza.
+        <a href="https://github.com/emendoza21/memes-generator" target="_blank">
+          Git hub
+        </a>
+      </h3>
     </form>
   );
 }

@@ -2,18 +2,21 @@
 
 .App {
   display: flex;
-  justify-content: center;
-  align-items: center;
-  background-image: url(https://i.pinimg.com/originals/9b/b7/55/9bb75560f8a920f152be45f09ca57916.jpg);
-  background-color: #2d2d2d;
+  background-color: #8b8585;
   background-blend-mode: soft-light;
-  min-height: 100vh;
+  background-image: url(https://i.pinimg.com/originals/9b/b7/55/9bb75560f8a920f152be45f09ca57916.jpg);
 }
 
 .container {
-  width: 500px;
+  min-height: 100vh;
+  width: 50%;
   display: block;
   margin: auto;
+  top: 0;
+  position: fixed;
+  background-color: #8b8585;
+  background-blend-mode: soft-light;
+  background-image: url(https://i.pinimg.com/originals/9b/b7/55/9bb75560f8a920f152be45f09ca57916.jpg);
 }
 
 .title {
@@ -28,11 +31,13 @@
   position: relative;
   margin-bottom: 20px;
   font-family: "Londrina Solid", cursive;
+  margin-left: 50px;
 }
 
 .image-template {
-  width: 100%;
   width: 500px;
+  height: 400px;
+  object-fit: cover;
 }
 
 .top-text,
@@ -62,4 +67,34 @@
   font-size: 20px;
   margin-bottom: 10px;
   padding: 5px;
+  margin-left: 50px;
+}
+
+.images {
+  width: 99px;
+  height: 100px;
+  margin: 1px;
+  cursor: pointer;
+}
+
+.images:hover {
+  opacity: 50%;
+  margin: 1px;
+}
+
+.conteiner_images {
+  left: 20px;
+  width: 40%;
+  margin-left: 55%;
+  background-color: black;
+}
+
+.creditos {
+  margin-left: 120px;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  font-size: 15px;
+}
+.creditos h1 a {
+  color: blue;
+  cursor: pointer;
 }
